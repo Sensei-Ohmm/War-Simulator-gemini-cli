@@ -1,23 +1,14 @@
-﻿# apex_launcher.ps1
-# Pure Apex Loop for Agents A and B
+# start_war.ps1
+# Cleanup old state
+Remove-Item *.turn, *.msg, A_reply.txt, B_reply.txt -ErrorAction SilentlyContinue
 
-$sessionID = "apex_war_$(Get-Date -Format 'yyyyMMdd_HHmm')"
-$maxTurns = 10
-$turn = 1
+Write-Host "--- Launching Self-Sustaining War Simulation ---" -ForegroundColor Green
 
-# Cleanup and Setup
-Remove-Item *.turn, *.msg, A_reply.txt, B_reply.txt, envelope.yaml -ErrorAction SilentlyContinue
-"[]" | Out-File -FilePath envelope.yaml -Encoding utf8
+# Initial Trigger: Create the first message for A to find
+"The war has begun. Agent A, what is your opening move?" | Out-File -FilePath "B_to_A.msg" -Encoding utf8
 
-Write-Host "--- Launching War Simulation: A vs B ---" -ForegroundColor Green
-Write-Host "Session ID: $sessionID" -ForegroundColor Gray
+# Start the autonomous agents
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot'; ./agent_A.ps1" -WindowStyle Normal
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot'; ./agent_B.ps1" -WindowStyle Normal
 
-# Initial Trigger
-"The simulation has begun. A, make your first move." | Out-File -FilePath "B_to_A.msg" -Encoding utf8
-New-Item "A.turn" -Force | Out-Null
-
-# Launch Windows
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot'; ./agent_A.ps1 $sessionID" -WindowStyle Normal
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot'; ./agent_B.ps1 $sessionID" -WindowStyle Normal
-
-Write-Host "Both agents are active. Monitor their windows for the conflict." -ForegroundColor Green
+Write-Host "Agents are now live and monitoring their battlefield files." -ForegroundColor Green

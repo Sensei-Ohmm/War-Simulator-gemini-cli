@@ -1,16 +1,20 @@
 # agent_A.ps1
-param([string]$sessionID)
 chcp 65001 >$null
-Write-Host "--- Agent A: Persistent War Room ---" -ForegroundColor Red
+Write-Host "--- Agent A: Self-Sustaining Red Commander ---" -ForegroundColor Red
 
-# Initial Setup Prompt to define the personality and rules
-$setupPrompt = "You are Agent A, the Red Commander. This is a persistent War Simulation. `n" +
-               "Rules: 1. You will stay in this window. 2. When it is your turn, you will see a message from B. `n" +
-               "3. You must decide your move, write it to 'A_reply.txt', and run 'powershell ./send_to_B.ps1'. `n" +
-               "Stay alert. History is now remembered in this window."
+$prompt = "You are Agent A, a strategic commander in a persistent War Simulation. `n" +
+          "MISSION: You must autonomously manage your side of the war. `n" +
+          "PROCEDURE: `n" +
+          "1. Use your tools (shell/ls) to check if 'B_to_A.msg' exists. `n" +
+          "2. If it exists: `n" +
+          "   - Read the message. `n" +
+          "   - Decide your response. `n" +
+          "   - Write your response to 'A_reply.txt'. `n" +
+          "   - Run 'powershell ./send_to_B.ps1' to pass the turn. `n" +
+          "   - Delete 'B_to_A.msg' so you know the turn has passed. `n" +
+          "3. If it does not exist, wait a few seconds and check again. `n" +
+          "4. CONTINUE THIS LOOP FOREVER. Do not stop until the war is won. `n" +
+          "START THE MONITORING LOOP NOW."
 
-# Start the interactive session and wait for turns
-gemini -i $setupPrompt --yolo --resume $sessionID
-
-# Note: The agent will now live inside the interactive prompt. 
-# It will see turns as you/the script inputs them into the session.
+# Start in interactive mode so it stays open and remembers everything
+gemini -i $prompt --yolo

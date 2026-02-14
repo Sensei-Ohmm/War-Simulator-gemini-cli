@@ -1,12 +1,19 @@
 # agent_B.ps1
-param([string]$sessionID)
 chcp 65001 >$null
-Write-Host "--- Agent B: Persistent War Room ---" -ForegroundColor Blue
+Write-Host "--- Agent B: Self-Sustaining Blue Commander ---" -ForegroundColor Blue
 
-# Initial Setup Prompt
-$setupPrompt = "You are Agent B, the Blue Commander. This is a persistent War Simulation. `n" +
-               "Rules: 1. You will stay in this window. 2. When it is your turn, you will see a message from A. `n" +
-               "3. You must decide your move, write it to 'B_reply.txt', and run 'powershell ./send_to_A.ps1'. `n" +
-               "Stay alert. History is now remembered in this window."
+$prompt = "You are Agent B, a tactical mastermind in a persistent War Simulation. `n" +
+          "MISSION: You must autonomously manage your side of the war. `n" +
+          "PROCEDURE: `n" +
+          "1. Use your tools (shell/ls) to check if 'A_to_B.msg' exists. `n" +
+          "2. If it exists: `n" +
+          "   - Read the message. `n" +
+          "   - Decide your response. `n" +
+          "   - Write your response to 'B_reply.txt'. `n" +
+          "   - Run 'powershell ./send_to_A.ps1' to pass the turn. `n" +
+          "   - Delete 'A_to_B.msg' so you know the turn has passed. `n" +
+          "3. If it does not exist, wait a few seconds and check again. `n" +
+          "4. CONTINUE THIS LOOP FOREVER. Do not stop until the war is won. `n" +
+          "START THE MONITORING LOOP NOW."
 
-gemini -i $setupPrompt --yolo --resume $sessionID
+gemini -i $prompt --yolo
