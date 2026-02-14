@@ -1,0 +1,8 @@
+﻿turn.txt
+*.msg
+*.txt
+!convo.txt
+!war_history.txt
+!README.md
+.gemini/
+project_index.txt
