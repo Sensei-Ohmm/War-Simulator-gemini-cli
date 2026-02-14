@@ -1,8 +1,6 @@
 # send_to_B.ps1
-param([string]$msgFile = "A_reply.txt")
-if (Test-Path $msgFile) {
-    $content = Get-Content $msgFile
-    $content | Out-File -FilePath "A_to_B.msg" -Encoding utf8
+if (Test-Path "A_reply.txt") {
+    Move-Item "A_reply.txt" "A_to_B.msg" -Force
     New-Item "B.turn" -Force | Out-Null
-    Write-Host "Message sent to Window B!" -ForegroundColor Cyan
+    Write-Host "Handshake Complete: Turn passed to B" -ForegroundColor Cyan
 }
