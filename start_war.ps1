@@ -9,7 +9,7 @@ $turn = 1
 Remove-Item *.turn, *.msg, A_reply.txt, B_reply.txt, envelope.yaml -ErrorAction SilentlyContinue
 "[]" | Out-File -FilePath envelope.yaml -Encoding utf8
 
-Write-Host "--- Launching Apex Protocol: A vs B ---" -ForegroundColor Green
+Write-Host "--- Launching War Simulation: A vs B ---" -ForegroundColor Green
 Write-Host "Session ID: $sessionID" -ForegroundColor Gray
 
 # Initial Trigger

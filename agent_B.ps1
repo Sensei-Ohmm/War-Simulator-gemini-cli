@@ -10,11 +10,11 @@ while($true) {
         
         Write-Host "`n[Message from A]: $enemyMsg" -ForegroundColor Gray
 
-        # Apex Prompt for B
-        $prompt = "You are Agent B. This is an Apex Protocol simulation. `n" +
-                  "HISTORY: $history `n" +
+        # War Simulation Prompt for B
+        $prompt = "You are Agent B. This is a War Simulation. `n" +
+                  "BATTLEFIELD STATE: $history `n" +
                   "A SAID: '$enemyMsg' `n" +
-                  "TASK: Execute your turn. 1. Decide your move. 2. Write your reply into 'B_reply.txt'. 3. Update 'envelope.yaml' with your facts using write_file. 4. Run 'powershell ./send_to_A.ps1' using run_shell_command."
+                  "TASK: Execute your turn. 1. Decide your move. 2. Write your reply into 'B_reply.txt'. 3. Update 'envelope.yaml' with the current state of the war using write_file. 4. Run 'powershell ./send_to_A.ps1' using run_shell_command."
 
         gemini -p $prompt --yolo --resume $sessionID
     }
