@@ -1,4 +1,4 @@
-# apex_launcher.ps1
+﻿# apex_launcher.ps1
 # Pure Apex Loop for Agents A and B
 
 $sessionID = "apex_war_$(Get-Date -Format 'yyyyMMdd_HHmm')"
